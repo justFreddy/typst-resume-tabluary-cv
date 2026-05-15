@@ -1,0 +1,79 @@
+#let accent = rgb("#0B7285")
+
+#let shared_contact_info = (
+  phone: (
+    value: "+49 170 1234567",
+    icon: "../assets/icons/phone.svg",
+    alt_key: "phone",
+    link: "tel:+491701234567",
+  ),
+  email: (
+    value: "john.doe@example.com",
+    icon: "../assets/icons/email.svg",
+    alt_key: "email",
+  ),
+  location: (
+    value: "Berlin",
+    icon: "../assets/icons/location.svg",
+    alt_key: "location",
+  ),
+  birth_date: (
+    value: "01.01.1990",
+    icon: "../assets/icons/birth-date.svg",
+    alt_key: "birth_date",
+  ),
+  linkedin: (
+    value: "linkedin.com/in/johndoe",
+    icon: "../assets/icons/linkedin.svg",
+    alt_key: "linkedin",
+    link: "https://linkedin.com/in/johndoe",
+  ),
+  github: (
+    value: "github.com/johndoe",
+    icon: "../assets/icons/github.svg",
+    alt_key: "github",
+    link: "https://github.com/johndoe",
+  ),
+)
+
+#let skills = (
+  (
+    name: "TypeScript",
+    icon: "../assets/logos/example.svg",
+    alt: "Skill: TypeScript logo",
+  ),
+  (
+    name: "Python",
+    icon: "../assets/logos/example.svg",
+    alt: "Skill: Python logo",
+  ),
+  (
+    name: "Go",
+    icon: "../assets/logos/example.svg",
+    alt: "Skill: Go logo",
+  ),
+  (
+    name: "React",
+    icon: "../assets/logos/example.svg",
+    alt: "Skill: React logo",
+  ),
+  (
+    name: "Node.js",
+    icon: "../assets/logos/example.svg",
+    alt: "Skill: Node.js logo",
+  ),
+  (
+    name: "Docker",
+    icon: "../assets/logos/example.svg",
+    alt: "Skill: Docker logo",
+  ),
+)
+
+#let profile_name = "John Doe"
+
+#let photo_path = "../assets/photo-placeholder.svg"
+
+#let sender_street = "Musterstraße 12"
+#let sender_postal_code = "10115"
+#let sender_city = "Berlin"
+

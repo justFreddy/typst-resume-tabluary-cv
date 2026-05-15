@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Dev Stack Logo</title>
+  <path d="M32 8L12 24L12 40L32 56L52 40L52 24Z" fill="#2490e0"/>
+  <rect x="28" y="16" width="8" height="8" fill="#fff" opacity="0.7"/>
+</svg>
