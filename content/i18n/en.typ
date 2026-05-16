@@ -1,6 +1,7 @@
 #let section_labels = (
   profile: "Profile",
   skills: "Programming Languages & Frameworks",
+  languages: "Languages",
   hobbies: "Hobbies & Interests",
   career_and_education: "Experience & Education",
 )

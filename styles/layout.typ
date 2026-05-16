@@ -200,6 +200,26 @@
   ]
 }
 
+#let languages_section(title: "Sprachen", languages: (), accent: black) = {
+  [
+    #section_title(title, accent)
+    #for (index, language) in languages.enumerate() [
+      #if index > 0 [
+        #h(8pt)
+      ]
+      #box(
+        fill: rgb("#F1F5F9"),
+        inset: (x: 8pt, y: 4pt),
+        radius: 99pt,
+      )[
+        #text(weight: "semibold")[#language.name]
+        #h(6pt)
+        #text(size: 8.8pt, fill: accent, weight: "semibold")[#language.level]
+      ]
+    ]
+  ]
+}
+
 #let cv_document(
   profile: (),
   profile_role: "",
@@ -209,6 +229,7 @@
   icon_alt_labels: (),
   profile_title: "Profil",
   timeline_sections: (),
+  languages: (),
   section_labels: (),
   grade_labels: (),
   hobbies: (),
@@ -237,6 +258,13 @@
       #v(8pt)
     ]
 
+    #languages_section(
+      title: section_labels.languages,
+      languages: languages,
+      accent: accent,
+    )
+    #v(8pt)
+
     #hobbies_section(
       title: section_labels.hobbies,
       hobbies: hobbies,
@@ -262,7 +290,10 @@
      ]
      #if recipient.sender_email != none [
        #linebreak()
-       #text(size: 9pt, fill: rgb("#334155"))[#recipient.sender_email]
+       #cover_letter_contact_value(
+         recipient.sender_email,
+         target: recipient.sender_email_link,
+       )
      ]
      #if recipient.sender_phone != none [
        #linebreak()

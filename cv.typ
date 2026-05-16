@@ -1,6 +1,6 @@
 #import "styles/theme.typ": apply_theme
 #import "content/data.typ": accent, photo_path, profile_name, skills
-#import "content/cv.__LANG__.typ": hobbies, personal_info, profile_summary, role_key, timeline_sections
+#import "content/cv.__LANG__.typ": hobbies, languages, personal_info, profile_summary, role_key, timeline_sections
 #import "content/i18n/__LANG__.typ": contact_labels, grade_labels, icon_alt_labels, role_labels, section_labels
 #import "styles/layout.typ": cv_document
 
@@ -21,6 +21,7 @@
   icon_alt_labels: icon_alt_labels,
   profile_title: section_labels.profile,
   timeline_sections: timeline_sections,
+  languages: languages,
   section_labels: section_labels,
   grade_labels: grade_labels,
   hobbies: hobbies,

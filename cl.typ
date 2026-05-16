@@ -14,7 +14,9 @@
   ..cover_letter_recipient,
   sender_address: formatted_sender_address,
   sender_email: shared_contact_info.email.value,
+  sender_email_link: shared_contact_info.email.link,
   sender_phone: shared_contact_info.phone.value,
+  sender_phone_link: shared_contact_info.phone.link,
   subject: cover_letter_subject,
 )
 

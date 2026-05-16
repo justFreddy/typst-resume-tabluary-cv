@@ -16,6 +16,7 @@
     value: shared_contact_info.email.value,
     icon: shared_contact_info.email.icon,
     alt_key: shared_contact_info.email.alt_key,
+    link: shared_contact_info.email.link,
   ),
   (
     key_key: "location",
@@ -92,6 +93,17 @@
 )
 
 #let role_key = "software_developer"
+
+#let languages = (
+  (
+    name: "Deutsch",
+    level: "Muttersprache",
+  ),
+  (
+    name: "Englisch",
+    level: "Fließend",
+  ),
+)
 
 #let hobbies = (
   "Lorem ipsum",
