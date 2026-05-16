@@ -12,6 +12,11 @@
   latest: "Letzte Note",
 )
 
+#let timeline_labels = (
+  school: "Berufsschule",
+  continued: "Übernommen",
+)
+
 #let contact_labels = (
   location: "Address",
   birth_date: "Geburtsdatum",

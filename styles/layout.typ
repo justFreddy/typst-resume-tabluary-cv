@@ -114,6 +114,8 @@
   title: "",
   items: (),
   grade_labels: (final: "Final Grade", expected: "Expected Grade", latest: "Latest Grade"),
+  timeline_school_label: "Berufsschule",
+  timeline_continued_label: "Übernommen",
   accent: black,
 ) = {
   [
@@ -122,8 +124,65 @@
       #let final_grade = item.at("final_grade", default: none)
       #let expected_grade = item.at("expected_grade", default: none)
       #let latest_grade = item.at("latest_grade", default: none)
+      #let school = item.at("school", default: none)
       #let has_grade_info = final_grade != none or expected_grade != none or latest_grade != none
+      #let has_newer_same_company = index > 0 and item.company == items.at(index - 1).company
       #let show_company = index == 0 or item.company != items.at(index - 1).company
+
+      #let role_content = if has_grade_info [
+        #v(-4pt)
+        #grid(
+          columns: (1fr, auto),
+          gutter: 6pt,
+          stroke: none,
+          inset: 0pt,
+          align: (left, top),
+
+          [#text(fill: rgb("#3F3F46"))[#item.role]],
+
+          [
+            #align(right)[
+              #text(size: 9pt, fill: accent, weight: "semibold")[
+                #if final_grade != none [
+                  #grade_labels.final: #final_grade
+                ]
+                #if expected_grade != none [
+                  #if final_grade != none [ | ]
+                  #grade_labels.expected: #expected_grade
+                ]
+                #if latest_grade != none [
+                  #if final_grade != none or expected_grade != none [ | ]
+                  #grade_labels.latest: #latest_grade
+                ]
+              ]
+            ]
+          ],
+        )
+      ] else [
+        #text(fill: rgb("#3F3F46"))[#item.role]
+      ]
+
+      #let show_school_on_older = school != none and has_newer_same_company
+
+      #let company_and_role = if show_company [
+        #stack(spacing: 1pt)[
+          #text(weight: "bold")[#item.company]
+          #if school != none [
+            #linebreak()
+            #text(size: 8.2pt, fill: rgb("#64748B"))[#timeline_school_label: #school]
+          ]
+          #linebreak()
+          #role_content
+        ]
+      ] else if show_school_on_older [
+        #stack(spacing: 1pt)[
+          #text(size: 8.2pt, fill: rgb("#64748B"))[#timeline_school_label: #school]
+          #linebreak()
+          #role_content
+        ]
+      ] else [
+        #role_content
+      ]
 
       #table(
         columns: (18fr, 82fr),
@@ -132,55 +191,7 @@
         inset: (x: 0pt, y: 0pt),
         [#text(weight: "semibold", fill: accent)[#item.period]],
         [
-          #if has_grade_info [
-            #let role_with_grades = grid(
-              columns: (1fr, auto),
-              gutter: 6pt,
-              stroke: none,
-              inset: 0pt,
-              align: (left, top),
-
-              [#text(fill: rgb("#3F3F46"))[#item.role]],
-
-              [
-              #align(right)[
-                #text(size: 9pt, fill: accent, weight: "semibold")[
-                  #if final_grade != none [
-                    #grade_labels.final: #final_grade
-                  ]
-                  #if expected_grade != none [
-                    #if final_grade != none [ | ]
-                    #grade_labels.expected: #expected_grade
-                  ]
-                  #if latest_grade != none [
-                    #if final_grade != none or expected_grade != none [ | ]
-                    #grade_labels.latest: #latest_grade
-                  ]
-                ]
-                ]
-              ],
-            )
-
-            #if show_company [
-              #stack(
-                spacing: 6pt,
-                text(weight: "bold")[#item.company],
-                role_with_grades,
-              )
-            ] else [
-              #role_with_grades
-            ]
-          ] else [
-            #if show_company [
-              #stack(
-                spacing: 6pt,
-                text(weight: "bold")[#item.company],
-                text(fill: rgb("#3F3F46"))[#item.role],
-              )
-            ] else [
-              #text(fill: rgb("#3F3F46"))[#item.role]
-            ]
-          ]
+          #company_and_role
 
           #if item.bullets.len() > 0 [
             #v(-4pt)
@@ -245,6 +256,8 @@
   languages: (),
   section_labels: (),
   grade_labels: (),
+  timeline_school_label: "Berufsschule",
+  timeline_continued_label: "Übernommen",
   hobbies: (),
   accent: black,
 ) = {
@@ -266,6 +279,8 @@
         title: section_labels.at(section.title_key, default: section.title_key),
         items: section.items,
         grade_labels: grade_labels,
+        timeline_school_label: timeline_school_label,
+        timeline_continued_label: timeline_continued_label,
         accent: accent,
       )
       #v(6pt)

@@ -12,6 +12,11 @@
   latest: "Latest Grade",
 )
 
+#let timeline_labels = (
+  school: "Vocational school",
+  continued: "Hired after apprenticeship",
+)
+
 #let contact_labels = (
   location: "Address",
   birth_date: "Birth date",

@@ -71,11 +71,12 @@
       ),
       (
         period: "10/2018 - 07/2020",
-        role: "Junior Developer",
+        role: "Ausbildung zum Fachinformatiker für Anwendungsentwicklung",
         company: "Dolor Sit Amet GmbH, Hamburg",
+        school: "Berufliche Schule IT und Technik Hamburg",
         bullets: (
-          "Sed do eiusmod tempor incididunt ut labore et dolore.",
-          "Ut enim ad minim veniam, quis nostrud exercitation.",
+          "Praktische Mitarbeit in Web- und Backend-Projekten.",
+          "Schulische Ausbildung mit Fokus auf Softwareentwicklung und Systemtechnik.",
         ),
       ),
       (

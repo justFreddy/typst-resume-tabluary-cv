@@ -71,11 +71,12 @@
       ),
       (
         period: "10/2018 - 07/2020",
-        role: "Junior Developer",
+        role: "Apprenticeship in Application Development",
         company: "Dolor Sit Amet GmbH, Hamburg",
+        school: "Vocational School for IT and Technology, Hamburg",
         bullets: (
-          "Sed do eiusmod tempor incididunt ut labore et dolore.",
-          "Ut enim ad minim veniam, quis nostrud exercitation.",
+          "Hands-on work in web and backend projects.",
+          "Vocational training focused on software development and systems engineering.",
         ),
       ),
       (
