@@ -6,7 +6,7 @@
   )
   set text(
     font: ("Avenir Next", "Avenir", "Arial", "Helvetica", "Apple SD Gothic Neo"),
-    size: 10.4pt,
+    size: 10pt,
     lang: lang,
   )
   set par(justify: true, leading: 0.62em)

@@ -1,7 +1,7 @@
 #let section_title(title, accent) = {
-  block(inset: (bottom: 5pt))[
-    #text(size: 11.2pt, weight: "bold", fill: accent)[#title]
-    #line(length: 100%, stroke: (paint: accent, thickness: 1pt))
+  block(inset: (bottom: 3pt))[
+    #text(size: 10.4pt, weight: "bold", fill: accent)[#title]
+    #line(length: 100%, stroke: (paint: accent, thickness: 0.8pt))
   ]
 }
 
@@ -33,15 +33,15 @@
   [
     #for item in items [
       #table(
-        columns: (4.5%, 95.5%),
+        columns: (4%, 95.5%),
         stroke: none,
-        inset: (x: 0pt, y: 1.7pt),
+        inset: (x: 0pt, y: 0.6pt),
         align: left,
         [
           #text(fill: accent)[#image(
             item.icon,
-            width: 9pt,
-            height: 9pt,
+            width: 8pt,
+            height: 8pt,
             fit: "contain",
             alt: icon_alt_labels.at(item.alt_key, default: item.alt_key),
           )]
@@ -67,31 +67,31 @@
 ) = {
   table(
     columns: (66%, 34%),
-    gutter: 14pt,
+    gutter: 8pt,
     stroke: none,
     inset: 0pt,
     [
-      #text(size: 28pt, weight: "bold")[#profile.name]
+      #text(size: 26pt, weight: "bold")[#profile.name]
       #linebreak()
-      #text(size: 11.4pt, weight: "semibold", fill: accent)[#profile_role]
-      #v(6pt)
+      #text(size: 10.8pt, weight: "semibold", fill: accent)[#profile_role]
+      #v(4pt)
       #contact_items_block(
         items: personal_info,
         contact_labels: contact_labels,
         icon_alt_labels: icon_alt_labels,
         accent: accent,
       )
-      #v(7pt)
+      #v(6pt)
       #section_title(profile_title, accent)
       #text(fill: rgb("#334155"))[#profile.summary]
-      #v(8pt)
+      #v(6pt)
       #stack(
         dir: ltr,
-        spacing: 18pt,
+        spacing: 12pt,
         ..skills.map(skill => image(
           skill.icon,
-          width: 32pt,
-          height: 32pt,
+          width: 26pt,
+          height: 26pt,
           fit: "contain",
           alt: skill.alt,
         )),
@@ -128,19 +128,14 @@
       #table(
         columns: (18fr, 82fr),
         stroke: none,
-        gutter: 10pt,
+        gutter: 6pt,
         inset: (x: 0pt, y: 0pt),
         [#text(weight: "semibold", fill: accent)[#item.period]],
         [
-          #if show_company [
-            #text(weight: "bold")[#item.company]
-            #v(0pt)
-          ]
-
           #if has_grade_info [
-            #grid(
+            #let role_with_grades = grid(
               columns: (1fr, auto),
-              gutter: 8pt,
+              gutter: 6pt,
               stroke: none,
               inset: 0pt,
               align: (left, top),
@@ -165,16 +160,34 @@
                 ]
               ],
             )
+
+            #if show_company [
+              #stack(
+                spacing: 6pt,
+                text(weight: "bold")[#item.company],
+                role_with_grades,
+              )
+            ] else [
+              #role_with_grades
+            ]
           ] else [
-            #text(fill: rgb("#3F3F46"))[#item.role]
+            #if show_company [
+              #stack(
+                spacing: 6pt,
+                text(weight: "bold")[#item.company],
+                text(fill: rgb("#3F3F46"))[#item.role],
+              )
+            ] else [
+              #text(fill: rgb("#3F3F46"))[#item.role]
+            ]
           ]
 
           #if item.bullets.len() > 0 [
-            #v(0pt)
+            #v(-4pt)
 
             #list(
               tight: true,
-              spacing: 4pt,
+              spacing: 5pt,
               ..item.bullets.map(bullet => [#bullet]),
             )
           ]
@@ -189,11 +202,11 @@
     #section_title(title, accent)
     #for (index, hobby) in hobbies.enumerate() [
       #if index > 0 [
-        #h(10pt)
+        #h(6pt)
       ]
       #box(
         fill: rgb("#F1F5F9"),
-        inset: (x: 8pt, y: 4pt),
+        inset: (x: 8pt, y: 3pt),
         radius: 99pt,
       )[#hobby]
     ]
@@ -205,15 +218,15 @@
     #section_title(title, accent)
     #for (index, language) in languages.enumerate() [
       #if index > 0 [
-        #h(8pt)
+        #h(6pt)
       ]
       #box(
         fill: rgb("#F1F5F9"),
-        inset: (x: 8pt, y: 4pt),
+        inset: (x: 8pt, y: 3pt),
         radius: 99pt,
       )[
         #text(weight: "semibold")[#language.name]
-        #h(6pt)
+        #h(4pt)
         #text(size: 8.8pt, fill: accent, weight: "semibold")[#language.level]
       ]
     ]
@@ -246,7 +259,7 @@
       profile_title: profile_title,
       accent: accent,
     )
-    #v(10pt)
+    #v(6pt)
 
     #for section in timeline_sections [
       #timeline_section(
@@ -255,7 +268,7 @@
         grade_labels: grade_labels,
         accent: accent,
       )
-      #v(8pt)
+      #v(6pt)
     ]
 
     #languages_section(
@@ -263,7 +276,7 @@
       languages: languages,
       accent: accent,
     )
-    #v(8pt)
+    #v(6pt)
 
     #hobbies_section(
       title: section_labels.hobbies,
@@ -339,4 +352,3 @@
      #text(weight: "semibold")[#sender_name]
    ]
  }
-
