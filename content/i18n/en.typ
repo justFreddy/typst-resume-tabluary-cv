@@ -14,7 +14,7 @@
 
 #let timeline_labels = (
   school: "Vocational school",
-  continued: "Hired after apprenticeship",
+  projects: "Projects",
 )
 
 #let contact_labels = (

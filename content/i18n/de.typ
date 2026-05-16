@@ -14,7 +14,7 @@
 
 #let timeline_labels = (
   school: "Berufsschule",
-  continued: "Übernommen",
+  projects: "Projekte",
 )
 
 #let contact_labels = (

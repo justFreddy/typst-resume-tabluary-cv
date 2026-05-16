@@ -48,7 +48,7 @@
   section_labels: section_labels,
   grade_labels: grade_labels,
   timeline_school_label: timeline_labels.school,
-  timeline_continued_label: timeline_labels.continued,
+  timeline_projects_label: timeline_labels.projects,
   hobbies: hobbies,
   accent: accent_color,
 )

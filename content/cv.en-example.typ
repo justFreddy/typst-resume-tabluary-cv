@@ -59,6 +59,10 @@
           "Sed do eiusmod tempor incididunt ut labore et dolore magna.",
           "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
         ),
+        projects: (
+          "Introduced a new deployment workflow for multiple services.",
+          "Built an internal dashboard for KPI reporting and quality assurance.",
+        ),
       ),
       (
         period: "08/2020 - 02/2023",
@@ -67,6 +71,10 @@
         bullets: (
           "Consectetur adipiscing elit, sed do eiusmod tempor incididunt.",
           "Ut labore et dolore magna aliqua, ut enim ad minim veniam.",
+        ),
+        projects: (
+          "Set up a CI/CD pipeline with automated tests and releases.",
+          "Improved API endpoints and reduced response times.",
         ),
       ),
       (

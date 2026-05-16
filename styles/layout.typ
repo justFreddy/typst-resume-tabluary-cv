@@ -114,8 +114,8 @@
   title: "",
   items: (),
   grade_labels: (final: "Final Grade", expected: "Expected Grade", latest: "Latest Grade"),
-  timeline_school_label: "Berufsschule",
-  timeline_continued_label: "Übernommen",
+  timeline_school_label: (),
+  timeline_projects_label: (),
   accent: black,
 ) = {
   [
@@ -125,7 +125,9 @@
       #let expected_grade = item.at("expected_grade", default: none)
       #let latest_grade = item.at("latest_grade", default: none)
       #let school = item.at("school", default: none)
+      #let projects = item.at("projects", default: ())
       #let has_grade_info = final_grade != none or expected_grade != none or latest_grade != none
+      #let has_projects = projects.len() > 0
       #let has_newer_same_company = index > 0 and item.company == items.at(index - 1).company
       #let show_company = index == 0 or item.company != items.at(index - 1).company
 
@@ -162,6 +164,18 @@
         #text(fill: rgb("#3F3F46"))[#item.role]
       ]
 
+      #let project_section = if has_projects [
+        #v(-6pt)
+        #text(size: 8.2pt, fill: rgb("#3F3F46"))[#timeline_projects_label]
+        #v(-8pt)
+        #list(
+          tight: true,
+          spacing: 2.5pt,
+          ..projects.map(project => [#text(fill: rgb("#3F3F46"))[#project]]),
+        )
+      ] else [
+      ]
+
       #let show_school_on_older = school != none and has_newer_same_company
 
       #let company_and_role = if show_company [
@@ -181,7 +195,9 @@
           #role_content
         ]
       ] else [
-        #role_content
+        #stack(spacing: 1pt)[
+          #role_content
+        ]
       ]
 
       #table(
@@ -201,6 +217,7 @@
               spacing: 5pt,
               ..item.bullets.map(bullet => [#bullet]),
             )
+            #project_section
           ]
         ],
       )
@@ -256,8 +273,8 @@
   languages: (),
   section_labels: (),
   grade_labels: (),
-  timeline_school_label: "Berufsschule",
-  timeline_continued_label: "Übernommen",
+  timeline_school_label: (),
+  timeline_projects_label: (),
   hobbies: (),
   accent: black,
 ) = {
@@ -280,7 +297,7 @@
         items: section.items,
         grade_labels: grade_labels,
         timeline_school_label: timeline_school_label,
-        timeline_continued_label: timeline_continued_label,
+        timeline_projects_label: timeline_projects_label,
         accent: accent,
       )
       #v(6pt)
