@@ -1,7 +1,9 @@
 #let section_title(title, accent) = {
   block(inset: (bottom: 3pt))[
     #text(size: 10.4pt, weight: "bold", fill: accent)[#title]
+    #v(-6pt)
     #line(length: 100%, stroke: (paint: accent, thickness: 0.8pt))
+    #v(-3pt)
   ]
 }
 
@@ -170,7 +172,7 @@
         #v(-8pt)
         #list(
           tight: true,
-          spacing: 2.5pt,
+          spacing: 5pt,
           ..projects.map(project => [#text(fill: rgb("#3F3F46"))[#project]]),
         )
       ] else [
