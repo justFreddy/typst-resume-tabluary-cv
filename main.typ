@@ -1,9 +1,9 @@
 #import "styles/theme.typ": apply_theme
-#import "content/data.typ": accent, photo_path, profile_name, skills, sender_street, sender_postal_code, sender_city, shared_contact_info, contact_mode
+#import "content/data.typ": accent, photo_path, profile_name, skills, sender_street, sender_postal_code, sender_city, shared_contact_info, contact_mode, layout
 #import "content/cv.__LANG__.typ": hobbies, languages, personal_info, profile_summary, timeline_sections
 #import "content/cl.__LANG__.typ": cover_letter_body, cover_letter_closing, cover_letter_date, cover_letter_recipient, cover_letter_subject
 #import "content/i18n/__LANG__.typ": contact_labels, cover_letter_labels, grade_labels, icon_alt_labels, section_labels, timeline_labels
-#import "styles/layout.typ": cover_letter_document, cv_document
+#import "styles/layout.typ": cover_letter_document, cv_document, cv_document_left
 
 #show: apply_theme.with(lang: "__LANG__")
 
@@ -51,4 +51,5 @@
   hobbies: hobbies,
   accent: accent_color,
   contact_mode: contact_mode,
+  layout: layout,
 )

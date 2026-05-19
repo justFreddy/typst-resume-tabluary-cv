@@ -71,6 +71,7 @@
         columns: (5%, 95%),
         stroke: none,
         inset: (x: 0pt, y: 3pt),
+        column-gutter: 4pt,
         align: left,
         ..build_cells(col1),
       ),
@@ -78,6 +79,7 @@
         columns: (5%, 95%),
         stroke: none,
         inset: (x: 0pt, y: 3pt),
+        column-gutter: 4pt,
         align: left,
         ..build_cells(col2),
       ),
@@ -90,6 +92,7 @@
           columns: (4%, 95.5%),
           stroke: none,
           inset: (x: 0pt, y: 3pt),
+          column-gutter: 4pt,
           align: left,
           [
             #text(fill: accent)[#contact_icon(item, accent, icon_alt_labels)]
@@ -249,12 +252,23 @@
         ]
       ]
 
+      #let period_parts = item.period.split(" - ")
+      #let period_display = if period_parts.len() == 2 [
+        #stack(spacing: 2pt,
+          align(left)[#text(weight: "semibold", fill: accent)[#period_parts.at(0)]],
+          align(right)[#text(weight: "semibold", fill: accent)[– #period_parts.at(1)]],
+        )
+      ] else [
+        #text(weight: "semibold", fill: accent)[#item.period]
+      ]
+
       #table(
-        columns: (1fr, 9fr),
+        columns: (2cm, 1fr),
         stroke: none,
         gutter: 6pt,
         inset: (x: 0pt, y: 0pt),
-        [#text(weight: "semibold", fill: accent)[#item.period]],
+        align: (right, top),
+        [#period_display],
         [
           #company_and_role
 
@@ -321,6 +335,147 @@
   ]
 }
 
+#let hero_section_left(
+  profile: (),
+  personal_info: (),
+  contact_labels: (),
+  icon_alt_labels: (),
+  profile_title: "Profil",
+  accent: black,
+  contact_mode: "full",
+  skills: (),
+  languages: (),
+  hobbies: (),
+  section_labels: (),
+  skills_title: "Skills",
+  timeline_sections: (),
+  timeline_school_label: (),
+  timeline_projects_label: (),
+  grade_labels: (),
+  photo_side: "left",
+) = {
+  let sidebar = [
+    #block(fill: rgb("#F8FAFC"), inset: 6pt, radius: 6pt)[
+      #image(
+        profile.photo_path,
+        width: 100%,
+        height: 8.7cm,
+        fit: "cover",
+      )
+    ]
+    #v(6pt)
+    #skills_section(
+      title: skills_title,
+      skills: skills,
+      icon_alt_labels: icon_alt_labels,
+      accent: accent,
+    )
+    #v(6pt)
+    #languages_section(
+      title: section_labels.languages,
+      languages: languages,
+      accent: accent,
+    )
+    #v(6pt)
+    #hobbies_section(
+      title: section_labels.hobbies,
+      hobbies: hobbies,
+      accent: accent,
+    )
+  ]
+
+  let main = [
+    #text(size: 26pt, weight: "bold")[#profile.name]
+    #v(-20pt)
+    #contact_items_block(
+      items: personal_info,
+      contact_labels: contact_labels,
+      icon_alt_labels: icon_alt_labels,
+      accent: accent,
+      contact_mode: contact_mode,
+    )
+    #v(6pt)
+    #text(fill: rgb("#334155"))[#profile.summary]
+    #v(6pt)
+    #for section in timeline_sections [
+      #timeline_section(
+          title: section_labels.at(section.title_key, default: section.title_key),
+          items: section.items,
+          grade_labels: grade_labels,
+          timeline_school_label: timeline_school_label,
+          timeline_projects_label: timeline_projects_label,
+          accent: accent,
+        )
+        #v(6pt)
+      ]
+    ]
+
+  if photo_side == "right" {
+    table(
+      columns: (1fr, 30%),
+      gutter: 8pt,
+      stroke: none,
+      inset: 0pt,
+      main,
+      sidebar,
+    )
+  } else {
+    table(
+      columns: (30%, 1fr),
+      gutter: 8pt,
+      stroke: none,
+      inset: 0pt,
+      sidebar,
+      main,
+    )
+  }
+}
+
+#let cv_document_left(
+  profile: (),
+  personal_info: (),
+  skills: (),
+  contact_labels: (),
+  icon_alt_labels: (),
+  profile_title: "Profil",
+  skills_title: "Skills",
+  timeline_sections: (),
+  languages: (),
+  section_labels: (),
+  grade_labels: (),
+  timeline_school_label: (),
+  timeline_projects_label: (),
+  hobbies: (),
+  accent: black,
+  contact_mode: "compact",
+  signature_path: "../assets/signature-placeholder.svg",
+  location_date_label: "Location, Date",
+  photo_side: "left",
+) = {
+  [
+    #hero_section_left(
+      profile: profile,
+      personal_info: personal_info,
+      contact_labels: contact_labels,
+      icon_alt_labels: icon_alt_labels,
+      profile_title: profile_title,
+      accent: accent,
+      contact_mode: contact_mode,
+      skills: skills,
+      languages: languages,
+      hobbies: hobbies,
+      section_labels: section_labels,
+      skills_title: skills_title,
+      timeline_sections: timeline_sections,
+      timeline_school_label: timeline_school_label,
+      timeline_projects_label: timeline_projects_label,
+      grade_labels: grade_labels,
+      photo_side: photo_side,
+    )
+    #v(6pt)
+  ]
+}
+
 #let cv_document(
   profile: (),
   personal_info: (),
@@ -340,51 +495,72 @@
   contact_mode: "compact",
   signature_path: "../assets/signature-placeholder.svg",
   location_date_label: "Location, Date",
+  layout: "default"
 ) = {
-  [
-    #hero_section(
+  if layout == "left" or layout == "right" [
+    #cv_document_left(
       profile: profile,
       personal_info: personal_info,
+      skills: skills,
       contact_labels: contact_labels,
       icon_alt_labels: icon_alt_labels,
       profile_title: profile_title,
+      skills_title: skills_title,
+      timeline_sections: timeline_sections,
+      languages: languages,
+      section_labels: section_labels,
+      grade_labels: grade_labels,
+      timeline_school_label: timeline_school_label,
+      timeline_projects_label: timeline_projects_label,
+      hobbies: hobbies,
       accent: accent,
       contact_mode: contact_mode,
+      photo_side: layout,
     )
-    #v(6pt)
+  ] else [
+    #hero_section(
+        profile: profile,
+        personal_info: personal_info,
+        contact_labels: contact_labels,
+        icon_alt_labels: icon_alt_labels,
+        profile_title: profile_title,
+        accent: accent,
+        contact_mode: contact_mode,
+      )
+      #v(6pt)
 
-    #for section in timeline_sections [
-      #timeline_section(
-        title: section_labels.at(section.title_key, default: section.title_key),
-        items: section.items,
-        grade_labels: grade_labels,
-        timeline_school_label: timeline_school_label,
-        timeline_projects_label: timeline_projects_label,
+      #for section in timeline_sections [
+        #timeline_section(
+          title: section_labels.at(section.title_key, default: section.title_key),
+          items: section.items,
+          grade_labels: grade_labels,
+          timeline_school_label: timeline_school_label,
+          timeline_projects_label: timeline_projects_label,
+          accent: accent,
+        )
+        #v(6pt)
+      ]
+
+      #skills_section(
+        title: skills_title,
+        skills: skills,
+        icon_alt_labels: icon_alt_labels,
         accent: accent,
       )
       #v(6pt)
-    ]
 
-    #skills_section(
-      title: skills_title,
-      skills: skills,
-      icon_alt_labels: icon_alt_labels,
-      accent: accent,
-    )
-    #v(6pt)
+      #languages_section(
+        title: section_labels.languages,
+        languages: languages,
+        accent: accent,
+      )
+      #v(6pt)
 
-    #languages_section(
-      title: section_labels.languages,
-      languages: languages,
-      accent: accent,
-    )
-    #v(6pt)
-
-    #hobbies_section(
-      title: section_labels.hobbies,
-      hobbies: hobbies,
-      accent: accent,
-    )
+      #hobbies_section(
+        title: section_labels.hobbies,
+        hobbies: hobbies,
+        accent: accent,
+      )
   ]
 }
 
