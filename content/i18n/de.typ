@@ -1,9 +1,10 @@
 #let section_labels = (
   profile: "Profil",
-  skills: "Programmiersprachen & Frameworks",
+  skills: "Skills",
   languages: "Sprachen",
   hobbies: "Hobbys & Interessen",
   career_and_education: "Beruf & Ausbildung",
+  location_date: "Ort, Datum",
 )
 
 #let grade_labels = (

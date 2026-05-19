@@ -1,3 +1,11 @@
+#let pill(body) = {
+  box(
+    fill: rgb("#F1F5F9"),
+    inset: (x: 8pt, y: 3pt),
+    radius: 99pt,
+  )[#body]
+}
+
 #let section_title(title, accent) = {
   block(inset: (bottom: 3pt))[
     #text(size: 10.4pt, weight: "bold", fill: accent)[#title]
@@ -5,18 +13,6 @@
     #line(length: 100%, stroke: (paint: accent, thickness: 0.8pt))
     #v(-3pt)
   ]
-}
-
-#let contact_value(item) = {
-  if item.at("link", default: none) != none {
-    [
-      #link(item.link)[#text(fill: rgb("#334155"))[#item.value]]
-    ]
-  } else {
-    [
-      #text(fill: rgb("#334155"))[#item.value]
-    ]
-  }
 }
 
 #let cover_letter_contact_value(value, target: none) = {
@@ -31,41 +27,105 @@
   }
 }
 
-#let contact_items_block(items: (), contact_labels: (), icon_alt_labels: (), accent: black) = {
-  [
-    #for item in items [
-      #table(
-        columns: (4%, 95.5%),
+#let contact_icon(item, accent, icon_alt_labels) = {
+  image(
+    item.icon,
+    width: 8pt,
+    height: 8pt,
+    fit: "contain",
+    alt: icon_alt_labels.at(item.alt_key, default: item.alt_key),
+  )
+}
+
+#let contact_text(item) = {
+  if item.at("link", default: none) != none {
+    link(item.link)[#text(fill: rgb("#334155"))[#item.value]]
+  } else {
+    text(fill: rgb("#334155"))[#item.value]
+  }
+}
+
+#let contact_items_block(items: (), contact_labels: (), icon_alt_labels: (), accent: black, contact_mode: "full") = {
+  if contact_mode == "compact" {
+    // Two-column layout: icon + value only, no labels
+    let half = calc.ceil(items.len() / 2)
+    let col1 = items.slice(0, half)
+    let col2 = items.slice(half)
+
+    let build_cells(col) = {
+      let cells = ()
+      for item in col {
+        cells.push([#text(fill: accent)[#contact_icon(item, accent, icon_alt_labels)]])
+        cells.push([#contact_text(item)])
+      }
+      cells
+    }
+
+    table(
+      columns: (1fr, 1fr),
+      stroke: none,
+      gutter: 12pt,
+      inset: 0pt,
+      align: left,
+      table(
+        columns: (5%, 95%),
         stroke: none,
-        inset: (x: 0pt, y: 0.6pt),
+        inset: (x: 0pt, y: 3pt),
         align: left,
-        [
-          #text(fill: accent)[#image(
-            item.icon,
-            width: 8pt,
-            height: 8pt,
-            fit: "contain",
-            alt: icon_alt_labels.at(item.alt_key, default: item.alt_key),
-          )]
-        ],
-        [
-          #text(weight: "semibold")[#contact_labels.at(item.key_key, default: item.key_key): ]
-          #contact_value(item)
-        ],
-      )
+        ..build_cells(col1),
+      ),
+      table(
+        columns: (5%, 95%),
+        stroke: none,
+        inset: (x: 0pt, y: 3pt),
+        align: left,
+        ..build_cells(col2),
+      ),
+    )
+  } else {
+    // Full mode: icon + label + value
+    [
+      #for item in items [
+        #table(
+          columns: (4%, 95.5%),
+          stroke: none,
+          inset: (x: 0pt, y: 3pt),
+          align: left,
+          [
+            #text(fill: accent)[#contact_icon(item, accent, icon_alt_labels)]
+          ],
+          [
+            #text(weight: "semibold")[#contact_labels.at(item.key_key, default: item.key_key): ]
+            #contact_text(item)
+          ],
+        )
+      ]
     ]
-  ]
+  }
+}
+
+#let skill_dots(level: 5, max: 5, accent: black) = {
+  let fill_color = accent
+  let empty_color = rgb("#CBD5E1")
+  box(stack(dir: ltr, spacing: 1pt,
+    ..range(max).map(i => {
+      if i < level {
+        block(width: 4pt, height: 4pt, fill: fill_color, radius: 99pt)
+      } else {
+        block(width: 4pt, height: 4pt, fill: empty_color, radius: 99pt)
+      }
+    })
+  ))
 }
 
 #let hero_section(
   profile: (),
-  profile_role: "",
   personal_info: (),
-  skills: (),
   contact_labels: (),
   icon_alt_labels: (),
   profile_title: "Profil",
   accent: black,
+  contact_mode: "full",
 ) = {
   table(
     columns: (66%, 34%),
@@ -74,30 +134,17 @@
     inset: 0pt,
     [
       #text(size: 26pt, weight: "bold")[#profile.name]
-      #linebreak()
-      #text(size: 10.8pt, weight: "semibold", fill: accent)[#profile_role]
-      #v(4pt)
+      #v(-20pt)
       #contact_items_block(
         items: personal_info,
         contact_labels: contact_labels,
         icon_alt_labels: icon_alt_labels,
         accent: accent,
+        contact_mode: contact_mode,
       )
       #v(6pt)
-      #section_title(profile_title, accent)
+      // #section_title(profile_title, accent)
       #text(fill: rgb("#334155"))[#profile.summary]
-      #v(6pt)
-      #stack(
-        dir: ltr,
-        spacing: 12pt,
-        ..skills.map(skill => image(
-          skill.icon,
-          width: 26pt,
-          height: 26pt,
-          fit: "contain",
-          alt: skill.alt,
-        )),
-      )
     ],
     [
       #block(fill: rgb("#F8FAFC"), inset: 6pt, radius: 6pt)[
@@ -203,7 +250,7 @@
       ]
 
       #table(
-        columns: (18fr, 82fr),
+        columns: (1fr, 9fr),
         stroke: none,
         gutter: 6pt,
         inset: (x: 0pt, y: 0pt),
@@ -227,18 +274,21 @@
   ]
 }
 
-#let hobbies_section(title: "Hobbys", hobbies: (), accent: black) = {
+#let skills_section(title: "Skills", skills: (), icon_alt_labels: (), accent: black) = {
   [
     #section_title(title, accent)
-    #for (index, hobby) in hobbies.enumerate() [
+    #for (index, skill) in skills.enumerate() [
       #if index > 0 [
         #h(6pt)
       ]
-      #box(
-        fill: rgb("#F1F5F9"),
-        inset: (x: 8pt, y: 3pt),
-        radius: 99pt,
-      )[#hobby]
+      #let level = skill.at("level", default: none)
+      #let dots = if level != none { skill_dots(level: level, accent: accent) } else { none }
+      #pill[
+        #box(image(skill.icon, width: 9pt, height: 9pt, fit: "contain", alt: skill.alt))
+        #h(4pt)
+        #text(weight: "semibold")[#skill.name]
+        #if dots != none [#h(4pt)#dots]
+      ]
     ]
   ]
 }
@@ -250,11 +300,7 @@
       #if index > 0 [
         #h(6pt)
       ]
-      #box(
-        fill: rgb("#F1F5F9"),
-        inset: (x: 8pt, y: 3pt),
-        radius: 99pt,
-      )[
+      #pill[
         #text(weight: "semibold")[#language.name]
         #h(4pt)
         #text(size: 8.8pt, fill: accent, weight: "semibold")[#language.level]
@@ -263,14 +309,26 @@
   ]
 }
 
+#let hobbies_section(title: "Hobbys", hobbies: (), accent: black) = {
+  [
+    #section_title(title, accent)
+    #for (index, hobby) in hobbies.enumerate() [
+      #if index > 0 [
+        #h(6pt)
+      ]
+      #pill[#hobby]
+    ]
+  ]
+}
+
 #let cv_document(
   profile: (),
-  profile_role: "",
   personal_info: (),
   skills: (),
   contact_labels: (),
   icon_alt_labels: (),
   profile_title: "Profil",
+  skills_title: "Skills",
   timeline_sections: (),
   languages: (),
   section_labels: (),
@@ -279,17 +337,19 @@
   timeline_projects_label: (),
   hobbies: (),
   accent: black,
+  contact_mode: "compact",
+  signature_path: "../assets/signature-placeholder.svg",
+  location_date_label: "Location, Date",
 ) = {
   [
     #hero_section(
       profile: profile,
-      profile_role: profile_role,
       personal_info: personal_info,
-      skills: skills,
       contact_labels: contact_labels,
       icon_alt_labels: icon_alt_labels,
       profile_title: profile_title,
       accent: accent,
+      contact_mode: contact_mode,
     )
     #v(6pt)
 
@@ -304,6 +364,14 @@
       )
       #v(6pt)
     ]
+
+    #skills_section(
+      title: skills_title,
+      skills: skills,
+      icon_alt_labels: icon_alt_labels,
+      accent: accent,
+    )
+    #v(6pt)
 
     #languages_section(
       title: section_labels.languages,
@@ -321,68 +389,68 @@
 }
 
 #let cover_letter_document(
-   sender_name: "",
-   recipient: (),
-   paragraphs: (),
-   closing: "",
-   date_line: "",
-   labels: (),
-   accent: black,
- ) = {
-   [
-     #text(weight: "semibold", size: 10pt)[#sender_name]
-     #if recipient.sender_address != none [
-       #linebreak()
-       #text(size: 9pt, fill: rgb("#334155"))[#recipient.sender_address]
-     ]
-     #if recipient.sender_email != none [
-       #linebreak()
-       #cover_letter_contact_value(
-         recipient.sender_email,
-         target: recipient.sender_email_link,
-       )
-     ]
-     #if recipient.sender_phone != none [
-       #linebreak()
-       #cover_letter_contact_value(
-         recipient.sender_phone,
-         target: recipient.sender_phone_link,
-       )
-     ]
+  sender_name: "",
+  recipient: (),
+  paragraphs: (),
+  closing: "",
+  date_line: "",
+  labels: (),
+  accent: black,
+) = {
+  [
+    #text(weight: "semibold", size: 10pt)[#sender_name]
+    #if recipient.sender_address != none [
+      #linebreak()
+      #text(size: 9pt, fill: rgb("#334155"))[#recipient.sender_address]
+    ]
+    #if recipient.sender_email != none [
+      #linebreak()
+      #cover_letter_contact_value(
+        recipient.sender_email,
+        target: recipient.sender_email_link,
+      )
+    ]
+    #if recipient.sender_phone != none [
+      #linebreak()
+      #cover_letter_contact_value(
+        recipient.sender_phone,
+        target: recipient.sender_phone_link,
+      )
+    ]
 
-     #v(14pt)
-     #text(weight: "semibold", size: 10pt)[#recipient.company]
-     #if recipient.name != none and recipient.name != "" [
-       #linebreak()
-       #text(fill: rgb("#334155"), size: 9pt)[#recipient.name]
-     ]
-     #for line in recipient.address_lines [
-       #linebreak()
-       #text(fill: rgb("#334155"), size: 9pt)[#line]
-     ]
+    #v(14pt)
+    #text(weight: "semibold", size: 10pt)[#recipient.company]
+    #if recipient.name != none and recipient.name != "" [
+      #linebreak()
+      #text(fill: rgb("#334155"), size: 9pt)[#recipient.name]
+    ]
+    #for line in recipient.address_lines [
+      #linebreak()
+      #text(fill: rgb("#334155"), size: 9pt)[#line]
+    ]
 
-     #v(14pt)
-     #if date_line != "" [
-       #align(right)[#text(fill: accent, weight: "semibold", size: 9pt)[#date_line]]
-       #v(12pt)
-     ]
+    #v(14pt)
+    #if date_line != "" [
+      #align(right)[#text(fill: accent, weight: "semibold", size: 9pt)[#date_line]]
+      #v(12pt)
+    ]
 
-     #if recipient.subject != none and recipient.subject != "" [
-       #text(weight: "bold", fill: accent, size: 10pt)[#recipient.subject]
-     ]
+    #if recipient.subject != none and recipient.subject != "" [
+      #text(weight: "bold", fill: accent, size: 10pt)[#recipient.subject]
+    ]
 
-     #v(12pt)
+    #v(12pt)
 
-     #for (idx, paragraph) in paragraphs.enumerate() [
-       #if idx > 0 [
-         #v(6pt)
-       ]
-       #paragraph
-     ]
+    #for (idx, paragraph) in paragraphs.enumerate() [
+      #if idx > 0 [
+        #v(6pt)
+      ]
+      #paragraph
+    ]
 
-     #v(12pt)
-     #text()[#closing]
-     #v(18pt)
-     #text(weight: "semibold")[#sender_name]
-   ]
- }
+    #v(12pt)
+    #text()[#closing]
+    #v(18pt)
+    #text(weight: "semibold")[#sender_name]
+  ]
+}
