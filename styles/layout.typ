@@ -616,6 +616,9 @@
   date_line: "",
   labels: (),
   accent: black,
+  show_signature: false,
+  signature_path: none,
+  signature_date: "",
 ) = {
   [
     #text(weight: "semibold", size: 10pt)[#sender_name]
@@ -671,6 +674,11 @@
     #v(12pt)
     #text()[#closing]
     #v(18pt)
+    #if show_signature and signature_path != none [
+        #v(-24pt)
+      #image(signature_path, height: 1cm, fit: "contain")
+          #v(-6pt)
+    ]
     #text(weight: "semibold")[#sender_name]
   ]
 }

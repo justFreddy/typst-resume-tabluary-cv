@@ -1,9 +1,9 @@
 #import "styles/theme.typ": apply_theme
-#import "content/data.typ": accent, photo_path, profile_name, skills, sender_street, sender_postal_code, sender_city, shared_contact_info, contact_mode, layout
+#import "content/data.typ": accent, contact_mode, layout, photo_path, profile_name, show_signature, signature_date, signature_path, skills, sender_street, sender_postal_code, sender_city, shared_contact_info
 #import "content/cv.__LANG__.typ": hobbies, languages, personal_info, profile_summary, timeline_sections
 #import "content/cl.__LANG__.typ": cover_letter_body, cover_letter_closing, cover_letter_date, cover_letter_recipient, cover_letter_subject
 #import "content/i18n/__LANG__.typ": contact_labels, cover_letter_labels, grade_labels, icon_alt_labels, section_labels, timeline_labels
-#import "styles/layout.typ": cover_letter_document, cv_document, cv_document_left
+#import "styles/layout.typ": cover_letter_document, cv_document
 
 #show: apply_theme.with(lang: "__LANG__")
 
@@ -29,6 +29,9 @@
   date_line: cover_letter_date,
   labels: cover_letter_labels,
   accent: accent_color,
+  show_signature: show_signature,
+  signature_path: signature_path,
+  signature_date: signature_date,
 )
 #pagebreak()
 #cv_document(
@@ -42,6 +45,7 @@
   contact_labels: contact_labels,
   icon_alt_labels: icon_alt_labels,
   profile_title: section_labels.profile,
+  skills_title: section_labels.skills,
   timeline_sections: timeline_sections,
   languages: languages,
   section_labels: section_labels,
@@ -52,4 +56,8 @@
   accent: accent_color,
   contact_mode: contact_mode,
   layout: layout,
+  show_signature: show_signature,
+  signature_path: signature_path,
+  signature_date: signature_date,
+  location_date_label: section_labels.location_date,
 )

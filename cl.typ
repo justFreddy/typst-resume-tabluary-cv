@@ -1,5 +1,5 @@
 #import "styles/theme.typ": apply_theme
-#import "content/data.typ": accent, profile_name, sender_street, sender_postal_code, sender_city, shared_contact_info
+#import "content/data.typ": accent, profile_name, sender_street, sender_postal_code, sender_city, shared_contact_info, show_signature, signature_path, signature_date
 #import "content/cl.__LANG__.typ": cover_letter_body, cover_letter_closing, cover_letter_date, cover_letter_recipient, cover_letter_subject
 #import "content/i18n/__LANG__.typ": cover_letter_labels
 #import "styles/layout.typ": cover_letter_document
@@ -28,6 +28,9 @@
   date_line: cover_letter_date,
   labels: cover_letter_labels,
   accent: accent_color,
+  show_signature: show_signature,
+  signature_path: signature_path,
+  signature_date: signature_date,
 )
 
 
