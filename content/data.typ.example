@@ -4,6 +4,8 @@
 
 #let layout = "default" // "left" = photo left, "right" = photo right, "default" = single column
 
+#let pill_stretch = false // false = left-to-right flow, true = stretch pills across full width
+
 #let show_signature = false
 #let signature_date = "Berlin, 01.01.2026"
 #let signature_path = "../assets/signature-placeholder.svg"

@@ -288,10 +288,10 @@
   ]
 }
 
-#let skills_section(title: "Skills", skills: (), icon_alt_labels: (), accent: black) = {
+#let skills_section(title: "Skills", skills: (), icon_alt_labels: (), accent: black, pill_stretch: false) = {
   [
     #section_title(title, accent)
-    #set par(justify: false)
+    #set par(justify: pill_stretch)
     #for (index, skill) in skills.enumerate() [
         #if index > 0 [
           #h(6pt)
@@ -308,10 +308,10 @@
   ]
 }
 
-#let languages_section(title: "Sprachen", languages: (), accent: black) = {
+#let languages_section(title: "Sprachen", languages: (), accent: black, pill_stretch: false) = {
   [
     #section_title(title, accent)
-    #set par(justify: false)
+    #set par(justify: pill_stretch)
     #for (index, language) in languages.enumerate() [
       #if index > 0 [
         #h(6pt)
@@ -325,10 +325,10 @@
   ]
 }
 
-#let hobbies_section(title: "Hobbys", hobbies: (), accent: black) = {
+#let hobbies_section(title: "Hobbys", hobbies: (), accent: black, pill_stretch: false) = {
   [
     #section_title(title, accent)
-    #set par(justify: false)
+    #set par(justify: pill_stretch)
     #for (index, hobby) in hobbies.enumerate() [
       #if index > 0 [
         #h(6pt)
@@ -371,6 +371,7 @@
   show_signature: false,
   signature_path: none,
   signature_date: "",
+  pill_stretch: false,
 ) = {
   let sidebar = [
     #block(fill: rgb("#F8FAFC"), inset: 6pt, radius: 6pt)[
@@ -387,18 +388,21 @@
       skills: skills,
       icon_alt_labels: icon_alt_labels,
       accent: accent,
+      pill_stretch: pill_stretch,
     )
     #v(6pt)
     #languages_section(
       title: section_labels.languages,
       languages: languages,
       accent: accent,
+      pill_stretch: pill_stretch,
     )
     #v(6pt)
     #hobbies_section(
       title: section_labels.hobbies,
       hobbies: hobbies,
       accent: accent,
+      pill_stretch: pill_stretch,
     )
     #if show_signature [
       #v(1fr)
@@ -481,6 +485,7 @@
   photo_side: "left",
   show_signature: false,
   signature_date: "",
+  pill_stretch: false,
 ) = {
   [
     #hero_section_left(
@@ -504,6 +509,7 @@
       show_signature: show_signature,
       signature_path: signature_path,
       signature_date: signature_date,
+      pill_stretch: pill_stretch,
     )
     #v(6pt)
   ]
@@ -532,6 +538,7 @@
   layout: "default",
   show_signature: false,
   signature_date: "",
+  pill_stretch: false,
 ) = {
   if layout == "left" or layout == "right" [
     #cv_document_left(
@@ -555,6 +562,7 @@
       show_signature: show_signature,
       signature_path: signature_path,
       signature_date: signature_date,
+      pill_stretch: pill_stretch,
     )
   ] else [
     #hero_section(
@@ -585,6 +593,7 @@
         skills: skills,
         icon_alt_labels: icon_alt_labels,
         accent: accent,
+        pill_stretch: pill_stretch,
       )
       #v(6pt)
 
@@ -592,6 +601,7 @@
         title: section_labels.languages,
         languages: languages,
         accent: accent,
+        pill_stretch: pill_stretch,
       )
       #v(6pt)
 
@@ -599,6 +609,7 @@
         title: section_labels.hobbies,
         hobbies: hobbies,
         accent: accent,
+        pill_stretch: pill_stretch,
       )
       #if show_signature [
         #v(12pt)
