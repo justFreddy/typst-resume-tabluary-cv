@@ -291,8 +291,8 @@
 #let skills_section(title: "Skills", skills: (), icon_alt_labels: (), accent: black) = {
   [
     #section_title(title, accent)
-    #align(left)[
-      #for (index, skill) in skills.enumerate() [
+    #set par(justify: false)
+    #for (index, skill) in skills.enumerate() [
         #if index > 0 [
           #h(6pt)
         ]
@@ -305,23 +305,21 @@
           #if dots != none [#h(4pt)#dots]
         ]
       ]
-    ]
   ]
 }
 
 #let languages_section(title: "Sprachen", languages: (), accent: black) = {
   [
     #section_title(title, accent)
-    #align(left)[
-      #for (index, language) in languages.enumerate() [
-        #if index > 0 [
-          #h(6pt)
-        ]
-        #pill[
-          #text(weight: "semibold")[#language.name]
-          #h(4pt)
-          #text(size: 8.8pt, fill: accent, weight: "semibold")[#language.level]
-        ]
+    #set par(justify: false)
+    #for (index, language) in languages.enumerate() [
+      #if index > 0 [
+        #h(6pt)
+      ]
+      #pill[
+        #text(weight: "semibold")[#language.name]
+        #h(4pt)
+        #text(size: 8.8pt, fill: accent, weight: "semibold")[#language.level]
       ]
     ]
   ]
@@ -330,13 +328,12 @@
 #let hobbies_section(title: "Hobbys", hobbies: (), accent: black) = {
   [
     #section_title(title, accent)
-    #align(left)[
-      #for (index, hobby) in hobbies.enumerate() [
-        #if index > 0 [
-          #h(6pt)
-        ]
-        #pill[#hobby]
+    #set par(justify: false)
+    #for (index, hobby) in hobbies.enumerate() [
+      #if index > 0 [
+        #h(6pt)
       ]
+      #pill[#hobby]
     ]
   ]
 }
