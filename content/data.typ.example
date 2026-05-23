@@ -1,5 +1,13 @@
 #let accent = rgb("#0B7285")
 
+#let contact_mode = "compact" // "compact" = icon + value, two columns; "full" = icon + label + value
+
+#let layout = "default" // "left" = photo left, "right" = photo right, "default" = single column
+
+#let show_signature = false
+#let signature_date = "Berlin, 01.01.2026"
+#let signature_path = "../assets/signature-placeholder.svg"
+
 #let shared_contact_info = (
   phone: (
     value: "+49 170 1234567",
@@ -42,31 +50,37 @@
     name: "TypeScript",
     icon: "../assets/logos/example.svg",
     alt: "Skill: TypeScript logo",
+    level: 4,
   ),
   (
     name: "Python",
     icon: "../assets/logos/example.svg",
     alt: "Skill: Python logo",
+    level: 4,
   ),
   (
     name: "Go",
     icon: "../assets/logos/example.svg",
     alt: "Skill: Go logo",
+    level: 2,
   ),
   (
     name: "React",
     icon: "../assets/logos/example.svg",
     alt: "Skill: React logo",
+    level: 4,
   ),
   (
     name: "Node.js",
     icon: "../assets/logos/example.svg",
     alt: "Skill: Node.js logo",
+    level: 3,
   ),
   (
     name: "Docker",
     icon: "../assets/logos/example.svg",
     alt: "Skill: Docker logo",
+    level: 3,
   ),
 )
 
@@ -77,4 +91,6 @@
 #let sender_street = "Musterstraße 12"
 #let sender_postal_code = "10115"
 #let sender_city = "Berlin"
+
+// Shared, non-language-specific data only.
 

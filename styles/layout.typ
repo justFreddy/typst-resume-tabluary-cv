@@ -335,6 +335,18 @@
   ]
 }
 
+#let signature_block(
+  signature_path: none,
+  signature_date: "",
+  accent: black,
+) = {
+  stack(spacing: 4pt,
+    image(signature_path, height: 1.5cm, fit: "contain"),
+    line(length: 6cm, stroke: (paint: rgb("#CBD5E1"), thickness: 0.6pt)),
+    text(size: 8pt, fill: rgb("#64748B"))[#signature_date],
+  )
+}
+
 #let hero_section_left(
   profile: (),
   personal_info: (),
@@ -353,6 +365,9 @@
   timeline_projects_label: (),
   grade_labels: (),
   photo_side: "left",
+  show_signature: false,
+  signature_path: none,
+  signature_date: "",
 ) = {
   let sidebar = [
     #block(fill: rgb("#F8FAFC"), inset: 6pt, radius: 6pt)[
@@ -382,6 +397,16 @@
       hobbies: hobbies,
       accent: accent,
     )
+    #if show_signature [
+      #v(1fr)
+      #align(if photo_side == "left" { left } else { right })[
+        #signature_block(
+          signature_path: signature_path,
+          signature_date: signature_date,
+          accent: accent,
+        )
+      ]
+    ]
   ]
 
   let main = [
@@ -451,6 +476,8 @@
   signature_path: "../assets/signature-placeholder.svg",
   location_date_label: "Location, Date",
   photo_side: "left",
+  show_signature: false,
+  signature_date: "",
 ) = {
   [
     #hero_section_left(
@@ -471,10 +498,14 @@
       timeline_projects_label: timeline_projects_label,
       grade_labels: grade_labels,
       photo_side: photo_side,
+      show_signature: show_signature,
+      signature_path: signature_path,
+      signature_date: signature_date,
     )
     #v(6pt)
   ]
 }
+
 
 #let cv_document(
   profile: (),
@@ -495,7 +526,9 @@
   contact_mode: "compact",
   signature_path: "../assets/signature-placeholder.svg",
   location_date_label: "Location, Date",
-  layout: "default"
+  layout: "default",
+  show_signature: false,
+  signature_date: "",
 ) = {
   if layout == "left" or layout == "right" [
     #cv_document_left(
@@ -516,6 +549,9 @@
       accent: accent,
       contact_mode: contact_mode,
       photo_side: layout,
+      show_signature: show_signature,
+      signature_path: signature_path,
+      signature_date: signature_date,
     )
   ] else [
     #hero_section(
@@ -561,6 +597,14 @@
         hobbies: hobbies,
         accent: accent,
       )
+      #if show_signature [
+        #v(12pt)
+        #signature_block(
+          signature_path: signature_path,
+          signature_date: signature_date,
+          accent: accent,
+        )
+      ]
   ]
 }
 

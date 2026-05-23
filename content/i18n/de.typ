@@ -5,6 +5,7 @@
   hobbies: "Hobbys & Interessen",
   career_and_education: "Beruf & Ausbildung",
   location_date: "Ort, Datum",
+  signature: "Unterschrift",
 )
 
 #let grade_labels = (

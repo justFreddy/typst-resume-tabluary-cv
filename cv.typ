@@ -1,5 +1,5 @@
 #import "styles/theme.typ": apply_theme
-#import "content/data.typ": accent, contact_mode, layout, photo_path, profile_name, signature_path, skills
+#import "content/data.typ": accent, contact_mode, layout, photo_path, profile_name, show_signature, signature_date, signature_path, skills
 #import "content/cv.__LANG__.typ": hobbies, languages, personal_info, profile_summary, timeline_sections
 #import "content/i18n/__LANG__.typ": contact_labels, grade_labels, icon_alt_labels, section_labels, timeline_labels
 #import "styles/layout.typ": cv_document
@@ -31,6 +31,8 @@
   contact_mode: contact_mode,
   layout: layout,
   signature_path: signature_path,
+  show_signature: show_signature,
+  signature_date: signature_date,
   location_date_label: section_labels.location_date,
 )
 
