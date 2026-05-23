@@ -110,12 +110,12 @@
 #let skill_dots(level: 5, max: 5, accent: black) = {
   let fill_color = accent
   let empty_color = rgb("#CBD5E1")
-  box(stack(dir: ltr, spacing: 1pt,
+  box(baseline: -20%, stack(dir: ltr, spacing: 1pt,
     ..range(max).map(i => {
       if i < level {
-        block(width: 4pt, height: 4pt, fill: fill_color, radius: 99pt)
+        box(width: 4pt, height: 4pt, fill: fill_color, radius: 99pt)
       } else {
-        block(width: 4pt, height: 4pt, fill: empty_color, radius: 99pt)
+        box(width: 4pt, height: 4pt, fill: empty_color, radius: 99pt)
       }
     })
   ))
@@ -291,17 +291,19 @@
 #let skills_section(title: "Skills", skills: (), icon_alt_labels: (), accent: black) = {
   [
     #section_title(title, accent)
-    #for (index, skill) in skills.enumerate() [
-      #if index > 0 [
-        #h(6pt)
-      ]
-      #let level = skill.at("level", default: none)
-      #let dots = if level != none { skill_dots(level: level, accent: accent) } else { none }
-      #pill[
-        #box(image(skill.icon, width: 9pt, height: 9pt, fit: "contain", alt: skill.alt))
-        #h(4pt)
-        #text(weight: "semibold")[#skill.name]
-        #if dots != none [#h(4pt)#dots]
+    #align(left)[
+      #for (index, skill) in skills.enumerate() [
+        #if index > 0 [
+          #h(6pt)
+        ]
+        #let level = skill.at("level", default: none)
+        #let dots = if level != none { skill_dots(level: level, accent: accent) } else { none }
+        #pill[
+          #box(baseline: 20%, image(skill.icon, width: 9pt, height: 9pt, fit: "contain", alt: skill.alt))
+          #h(4pt)
+          #text(weight: "semibold")[#skill.name]
+          #if dots != none [#h(4pt)#dots]
+        ]
       ]
     ]
   ]
@@ -310,14 +312,16 @@
 #let languages_section(title: "Sprachen", languages: (), accent: black) = {
   [
     #section_title(title, accent)
-    #for (index, language) in languages.enumerate() [
-      #if index > 0 [
-        #h(6pt)
-      ]
-      #pill[
-        #text(weight: "semibold")[#language.name]
-        #h(4pt)
-        #text(size: 8.8pt, fill: accent, weight: "semibold")[#language.level]
+    #align(left)[
+      #for (index, language) in languages.enumerate() [
+        #if index > 0 [
+          #h(6pt)
+        ]
+        #pill[
+          #text(weight: "semibold")[#language.name]
+          #h(4pt)
+          #text(size: 8.8pt, fill: accent, weight: "semibold")[#language.level]
+        ]
       ]
     ]
   ]
@@ -326,11 +330,13 @@
 #let hobbies_section(title: "Hobbys", hobbies: (), accent: black) = {
   [
     #section_title(title, accent)
-    #for (index, hobby) in hobbies.enumerate() [
-      #if index > 0 [
-        #h(6pt)
+    #align(left)[
+      #for (index, hobby) in hobbies.enumerate() [
+        #if index > 0 [
+          #h(6pt)
+        ]
+        #pill[#hobby]
       ]
-      #pill[#hobby]
     ]
   ]
 }
