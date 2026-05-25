@@ -34,6 +34,5 @@
   show_signature: show_signature,
   signature_date: signature_date,
   location_date_label: section_labels.location_date,
-  pill_stretch: pill_stretch,
 )
 
