@@ -9,6 +9,8 @@
 #let show_signature = false
 #let signature_date = "Berlin, 01.01.2026"
 #let signature_path = "../assets/signature-placeholder.svg"
+#let signature_position = "sidebar" // "sidebar" = bottom of sidebar, "after_timeline" = below timeline in main column
+#let signature_line_length = 6cm
 
 #let shared_contact_info = (
   phone: (

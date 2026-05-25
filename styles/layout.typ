@@ -345,10 +345,11 @@
   signature_path: none,
   signature_date: "",
   accent: black,
+  line_length: 6cm,
 ) = {
   stack(spacing: 4pt,
     image(signature_path, height: 1.5cm, fit: "contain"),
-    line(length: 6cm, stroke: (paint: rgb("#CBD5E1"), thickness: 0.6pt)),
+    line(length: line_length, stroke: (paint: rgb("#CBD5E1"), thickness: 0.6pt)),
     text(size: 8pt, fill: rgb("#64748B"))[#signature_date],
   )
 }
@@ -375,6 +376,8 @@
   signature_path: none,
   signature_date: "",
   pill_stretch: false,
+  signature_position: "sidebar",
+  signature_line_length: 6cm,
 ) = {
   let sidebar = [
     #block(fill: rgb("#F8FAFC"), inset: 6pt, radius: 6pt)[
@@ -407,13 +410,14 @@
       accent: accent,
       pill_stretch: pill_stretch,
     )
-    #if show_signature [
+    #if show_signature and signature_position == "sidebar" [
       #v(1fr)
       #align(if photo_side == "left" { left } else { right })[
         #signature_block(
           signature_path: signature_path,
           signature_date: signature_date,
           accent: accent,
+          line_length: signature_line_length,
         )
       ]
     ]
@@ -443,6 +447,17 @@
         )
         #v(6pt)
       ]
+    #if show_signature and signature_position == "after_timeline" [
+      #v(6pt)
+      #align(left)[
+        #signature_block(
+          signature_path: signature_path,
+          signature_date: signature_date,
+          accent: accent,
+          line_length: signature_line_length,
+        )
+      ]
+    ]
     ]
 
   if photo_side == "right" {
@@ -489,6 +504,8 @@
   show_signature: false,
   signature_date: "",
   pill_stretch: false,
+  signature_position: "sidebar",
+  signature_line_length: 6cm,
 ) = {
   [
     #hero_section_left(
@@ -513,6 +530,8 @@
       signature_path: signature_path,
       signature_date: signature_date,
       pill_stretch: pill_stretch,
+      signature_position: signature_position,
+      signature_line_length: signature_line_length,
     )
     #v(6pt)
   ]
@@ -542,6 +561,8 @@
   show_signature: false,
   signature_date: "",
   pill_stretch: false,
+  signature_position: "sidebar",
+  signature_line_length: 6cm,
 ) = {
   if layout == "left" or layout == "right" [
     #cv_document_left(
@@ -566,6 +587,8 @@
       signature_path: signature_path,
       signature_date: signature_date,
       pill_stretch: pill_stretch,
+      signature_position: signature_position,
+      signature_line_length: signature_line_length,
     )
   ] else [
     #hero_section(
@@ -620,6 +643,7 @@
           signature_path: signature_path,
           signature_date: signature_date,
           accent: accent,
+          line_length: signature_line_length,
         )
       ]
   ]
