@@ -11,6 +11,7 @@
 #let signature_path = "../assets/signature-placeholder.svg"
 #let signature_position = "sidebar" // "sidebar" = bottom of sidebar, "after_timeline" = below timeline in main column
 #let signature_line_length = 6cm
+#let signature_image_offset = 0pt // vertical offset of the signature image within the block
 
 #let shared_contact_info = (
   phone: (

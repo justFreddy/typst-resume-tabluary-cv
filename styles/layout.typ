@@ -346,9 +346,10 @@
   signature_date: "",
   accent: black,
   line_length: 6cm,
+  image_offset: 0pt,
 ) = {
   stack(spacing: 4pt,
-    image(signature_path, height: 1.5cm, fit: "contain"),
+    move(dy: image_offset, image(signature_path, height: 1.5cm, fit: "contain")),
     line(length: line_length, stroke: (paint: rgb("#CBD5E1"), thickness: 0.6pt)),
     text(size: 8pt, fill: rgb("#64748B"))[#signature_date],
   )
@@ -378,6 +379,7 @@
   pill_stretch: false,
   signature_position: "sidebar",
   signature_line_length: 6cm,
+  signature_image_offset: 0pt,
 ) = {
   let sidebar = [
     #block(fill: rgb("#F8FAFC"), inset: 6pt, radius: 6pt)[
@@ -418,6 +420,7 @@
           signature_date: signature_date,
           accent: accent,
           line_length: signature_line_length,
+          image_offset: signature_image_offset,
         )
       ]
     ]
@@ -448,13 +451,13 @@
         #v(6pt)
       ]
     #if show_signature and signature_position == "after_timeline" [
-      #v(6pt)
       #align(left)[
         #signature_block(
           signature_path: signature_path,
           signature_date: signature_date,
           accent: accent,
           line_length: signature_line_length,
+          image_offset: signature_image_offset,
         )
       ]
     ]
@@ -506,6 +509,7 @@
   pill_stretch: false,
   signature_position: "sidebar",
   signature_line_length: 6cm,
+  signature_image_offset: 0pt,
 ) = {
   [
     #hero_section_left(
@@ -532,6 +536,7 @@
       pill_stretch: pill_stretch,
       signature_position: signature_position,
       signature_line_length: signature_line_length,
+      signature_image_offset: signature_image_offset,
     )
     #v(6pt)
   ]
@@ -563,6 +568,7 @@
   pill_stretch: false,
   signature_position: "sidebar",
   signature_line_length: 6cm,
+  signature_image_offset: 0pt,
 ) = {
   if layout == "left" or layout == "right" [
     #cv_document_left(
@@ -589,6 +595,7 @@
       pill_stretch: pill_stretch,
       signature_position: signature_position,
       signature_line_length: signature_line_length,
+      signature_image_offset: signature_image_offset,
     )
   ] else [
     #hero_section(
@@ -644,6 +651,7 @@
           signature_date: signature_date,
           accent: accent,
           line_length: signature_line_length,
+          image_offset: signature_image_offset,
         )
       ]
   ]

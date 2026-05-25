@@ -1,5 +1,5 @@
 #import "styles/theme.typ": apply_theme
-#import "content/data.typ": accent, contact_mode, layout, photo_path, pill_stretch, profile_name, show_signature, signature_date, signature_line_length, signature_path, signature_position, skills
+#import "content/data.typ": accent, contact_mode, layout, photo_path, pill_stretch, profile_name, show_signature, signature_date, signature_image_offset, signature_line_length, signature_path, signature_position, skills
 #import "content/cv.__LANG__.typ": hobbies, languages, personal_info, profile_summary, timeline_sections
 #import "content/i18n/__LANG__.typ": contact_labels, grade_labels, icon_alt_labels, section_labels, timeline_labels
 #import "styles/layout.typ": cv_document
@@ -37,5 +37,6 @@
   pill_stretch: pill_stretch,
   signature_position: signature_position,
   signature_line_length: signature_line_length,
+  signature_image_offset: signature_image_offset,
 )
 
