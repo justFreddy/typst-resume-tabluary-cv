@@ -88,7 +88,10 @@
     // Full mode: icon + label + value
     [
       #for item in items [
-        #table(
+      #if index > 0 [
+        #v(8pt)
+      ]
+      #table(
           columns: (4%, 95.5%),
           stroke: none,
           inset: (x: 0pt, y: 3pt),
@@ -187,7 +190,7 @@
         #v(-4pt)
         #grid(
           columns: (1fr, auto),
-          gutter: 6pt,
+          gutter: 40pt,
           stroke: none,
           inset: 0pt,
           align: (left, top),
