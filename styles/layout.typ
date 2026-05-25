@@ -195,7 +195,7 @@
           inset: 0pt,
           align: (left, top),
 
-          [#text(fill: rgb("#3F3F46"))[#item.role]],
+          [#text(fill: rgb("#3F3F46"), weight: "medium")[#item.role]],
 
           [
             #align(right)[
@@ -216,7 +216,7 @@
           ],
         )
       ] else [
-        #text(fill: rgb("#3F3F46"))[#item.role]
+        #text(fill: rgb("#3F3F46"), weight: "medium")[#item.role]
       ]
 
       #let project_section = if has_projects [
