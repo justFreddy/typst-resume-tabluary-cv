@@ -1,5 +1,5 @@
 #import "styles/theme.typ": apply_theme
-#import "content/data.typ": accent, contact_mode, layout, photo_path, pill_stretch, profile_name, show_signature, signature_date, signature_image_offset, signature_line_length, signature_path, signature_position, skills, sender_street, sender_postal_code, sender_city, shared_contact_info
+#import "content/data.typ": accent, cl_margin, contact_mode, layout, photo_path, pill_stretch, profile_name, show_signature, signature_date, signature_image_offset, signature_line_length, signature_path, signature_position, skills, sender_street, sender_postal_code, sender_city, shared_contact_info
 #import "content/cv.__LANG__.typ": hobbies, languages, personal_info, profile_summary, timeline_sections
 #import "content/cl.__LANG__.typ": cover_letter_body, cover_letter_closing, cover_letter_date, cover_letter_recipient, cover_letter_subject
 #import "content/i18n/__LANG__.typ": contact_labels, cover_letter_labels, grade_labels, icon_alt_labels, section_labels, timeline_labels
@@ -32,6 +32,7 @@
   show_signature: show_signature,
   signature_path: signature_path,
   signature_date: signature_date,
+  margin: cl_margin,
 )
 #pagebreak()
 #cv_document(

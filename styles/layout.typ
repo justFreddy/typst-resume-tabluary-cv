@@ -668,8 +668,10 @@
   show_signature: false,
   signature_path: none,
   signature_date: "",
+  margin: (x: 2.5cm, y: 2.5cm),
 ) = {
   [
+    #set page(margin: margin)
     #text(weight: "semibold", size: 10pt)[#sender_name]
     #if recipient.sender_address != none [
       #linebreak()
