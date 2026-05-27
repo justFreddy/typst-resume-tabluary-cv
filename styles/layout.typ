@@ -18,11 +18,11 @@
 #let cover_letter_contact_value(value, target: none) = {
   if target != none {
     [
-      #link(target)[#text(size: 9pt, fill: rgb("#334155"))[#value]]
+      #link(target)[#text()[#value]]
     ]
   } else {
     [
-      #text(size: 9pt, fill: rgb("#334155"))[#value]
+      #text()[#value]
     ]
   }
 }
@@ -672,10 +672,10 @@
 ) = {
   [
     #set page(margin: margin)
-    #text(weight: "semibold", size: 10pt)[#sender_name]
+    #text(weight: "semibold")[#sender_name]
     #if recipient.sender_address != none [
       #linebreak()
-      #text(size: 9pt, fill: rgb("#334155"))[#recipient.sender_address]
+      #text()[#recipient.sender_address]
     ]
     #if recipient.sender_email != none [
       #linebreak()
@@ -693,24 +693,24 @@
     ]
 
     #v(14pt)
-    #text(weight: "semibold", size: 10pt)[#recipient.company]
+    #text(weight: "semibold")[#recipient.company]
     #if recipient.name != none and recipient.name != "" [
       #linebreak()
-      #text(fill: rgb("#334155"), size: 9pt)[#recipient.name]
+      #text()[#recipient.name]
     ]
     #for line in recipient.address_lines [
       #linebreak()
-      #text(fill: rgb("#334155"), size: 9pt)[#line]
+      #text()[#line]
     ]
 
     #v(14pt)
     #if date_line != "" [
-      #align(right)[#text(fill: accent, weight: "semibold", size: 9pt)[#date_line]]
+      #align(right)[#text(fill: accent, weight: "semibold")[#date_line]]
       #v(12pt)
     ]
 
     #if recipient.subject != none and recipient.subject != "" [
-      #text(weight: "bold", fill: accent, size: 10pt)[#recipient.subject]
+      #text(weight: "bold", fill: accent)[#recipient.subject]
     ]
 
     #v(12pt)
@@ -730,6 +730,6 @@
       #image(signature_path, height: 1cm, fit: "contain")
           #v(-6pt)
     ]
-    #text(weight: "semibold")[#sender_name]
+    #text()[#sender_name]
   ]
 }
